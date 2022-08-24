@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import classes from './style.module.css'
 import { DatePicker, Divider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADDITEM, SENDDATA } from '../../Redux/Actions/Action';
+import { ADDITEM, SENDDATA, UPDATEITEMDESCRIPTION, UPDATEITEMNAME, UPDATEITEMQTY, UPDATEITEMRATE } from '../../Redux/Actions/Action';
 import { v4 as uuidv4 } from 'uuid';
 
 const Invoice = () => {
@@ -44,25 +44,46 @@ const Invoice = () => {
         // console.log(data)
     }
 
-    const handleItem = (e) => {
-        setItemData({ ...itemData, [e.target.name]: e.target.value })
-        console.log(itemData)
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        data.item.push(itemData)
-        console.log(data)
-        dispatch(SENDDATA(data))
-    }
+    // const handleItem = (e) => {
+    //     setItemData({ ...itemData, [e.target.name]: e.target.value })
+    //     console.log(itemData)
+    // }
 
     const handleAdd = (e) => {
         dispatch(ADDITEM(INITIAL_ITEM))
     }
 
+    const handleName = (e, id) => {
+        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
+        dispatch(UPDATEITEMNAME(itemData))
+    }
+
+    const handleDescription = (e, id) => {
+        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
+        dispatch(UPDATEITEMDESCRIPTION(itemData))
+    }
+    
+    const handleQty = (e, id) => {
+        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
+        dispatch(UPDATEITEMQTY(itemData))
+    }
+
+    const handleRate = (e, id) => {
+        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
+        dispatch(UPDATEITEMRATE(itemData))
+    }
+
+    console.log(itemData)
     useEffect(() => {
         console.log(getData)
+        console.log(getItems)
     }, [data])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(data)
+        dispatch(SENDDATA({...data, item:getItems}))
+    }
 
     return (
         <div className={classes.defaultBackground}>
@@ -136,11 +157,11 @@ const Invoice = () => {
                                                 <div className="col-6">
                                                     <div className="item-form">
                                                         <div className="form-floating mb-3">
-                                                            <input type="text" className="form-control" id="floatingInput" placeholder="your@email.com" name='itemName' defaultValue={element.itemName} onChange={(e) => handleItem(e)} />
+                                                            <input type="text" className="form-control" id="floatingInput" placeholder="your@email.com" name='itemName' defaultValue={element.itemName} onChange={(e) => handleName(e, element.id)} />
                                                             <label>Item Name</label>
                                                         </div>
                                                         <div className="form-floating">
-                                                            <input type="text" className="form-control" id="floatingPassword" placeholder="Who Is This Invoice From?" name='itemDescription' defaultValue={element.itemDescription} onChange={(e) => handleItem(e)} />
+                                                            <input type="text" className="form-control" id="floatingPassword" placeholder="Who Is This Invoice From?" name='itemDescription' defaultValue={element.itemDescription} onChange={(e) => handleDescription(e, element.id)} />
                                                             <label>Description</label>
                                                         </div>
                                                     </div>
@@ -148,10 +169,10 @@ const Invoice = () => {
                                                 <div className="col-6">
                                                     <div className="row">
                                                         <div className="col-4">
-                                                            <input type="text" className="form-control" id="floatingPassword" name='itemQty' defaultValue={element.itemQty} placeholder="QTY" onChange={(e) => handleItem(e)} />
+                                                            <input type="text" className="form-control" id="floatingPassword" name='itemQty' defaultValue={element.itemQty} placeholder="QTY" onChange={(e) => handleQty(e , element.id)} />
                                                         </div>
                                                         <div className="col-4">
-                                                            <input type="text" className="form-control" id="floatingPassword" name='itemRate' defaultValue={element.itemRate} placeholder="RATE" onChange={(e) => handleItem(e)} />
+                                                            <input type="text" className="form-control" id="floatingPassword" name='itemRate' defaultValue={element.itemRate} placeholder="RATE" onChange={(e) => handleRate(e , element.id)} />
                                                         </div>
                                                         <div className="col-4">
                                                             <input type="text" className="form-control" id="floatingPassword" placeholder="0" />

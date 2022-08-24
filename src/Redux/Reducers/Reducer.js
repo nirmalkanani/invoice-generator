@@ -1,3 +1,4 @@
+import { UPDATEITEMDESCRIPTION, UPDATEITEMNAME, UPDATEITEMQTY, UPDATEITEMRATE } from "../Actions/Action";
 import {
     ADD_ITEM,
     SEND_DATA
@@ -31,6 +32,30 @@ export const itemsReducer = ( state = INITIAL_ITEM, action) => {
         return{
             ...state,
             items: [ ...state.items, action.data]
+        }
+        case UPDATEITEMNAME: 
+        const updateName = state.items.map((element) => element.id === action.data.id ? action.data : element)
+        return{
+            ...state,
+            items: updateName
+        }
+        case UPDATEITEMDESCRIPTION: 
+        const updateDescription = state.items.map((element) => element.id === action.data.id ? action.data : element)
+        return{
+            ...state,
+            items: updateDescription
+        }
+        case UPDATEITEMQTY: 
+        const updateQty = state.items.map((element) => element.id === action.data.id ? action.data : element)
+        return{
+            ...state,
+            items: updateQty
+        }
+        case UPDATEITEMRATE: 
+        const updateRate = state.items.map((element) => element.id === action.data.id ? action.data : element)
+        return{
+            ...state,
+            items: updateRate
         }
         default:
                 return state
