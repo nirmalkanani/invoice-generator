@@ -8,7 +8,6 @@ export const SENDDATA = (item) => {
 }
 
 export const ADDITEM =(item) => {
-    console.log(item)
     return{
         type:ADD_ITEM,
         data:item
@@ -16,28 +15,24 @@ export const ADDITEM =(item) => {
 }
 
 export const UPDATEITEMNAME =(item) => {
-    console.log(item)
     return{
         type:UPDATE_ITEMNAME,
         data:item
     }
 }
 export const UPDATEITEMDESCRIPTION =(item) => {
-    console.log(item)
     return{
         type:UPDATE_ITEMDESCRIPTION,
         data:item
     }
 }
 export const UPDATEITEMQTY =(item) => {
-    console.log(item)
     return{
         type:UPDATE_ITEMQTY,
         data:item
     }
 }
 export const UPDATEITEMRATE =(item) => {
-    console.log(item)
     return{
         type:UPDATE_ITEMRATE,
         data:item
