@@ -13,10 +13,9 @@ export const ADDITEM =(item) => {
         data:item
     }
 }
-
 export const DELETEITEM = (id) => {
     return {
         type:DELETE_ITEM,
         data:id
     }
-}
+} 
