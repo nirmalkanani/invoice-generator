@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import classes from './style.module.css'
-import { DatePicker, Divider } from 'antd';
+import { Divider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { ADDITEM, SENDDATA, UPDATEITEMDESCRIPTION, UPDATEITEMNAME, UPDATEITEMQTY, UPDATEITEMRATE } from '../../Redux/Actions/Action';
-import { v4 as uuidv4 } from 'uuid';
+import { SENDDATA } from '../../Redux/Actions/Action';
+import Items from './Items';
+import { toast } from 'react-toastify';
 
 const Invoice = () => {
 
@@ -17,14 +18,6 @@ const Invoice = () => {
         item: []
     }
 
-    const INITIAL_ITEM = {
-        itemID:uuidv4(),
-        itemName: "",
-        itemDescription: "",
-        itemQty: "",
-        itemRate: ""
-    }
-
     const getData = useSelector((state) => state.invoiceReducer.invoiceData)
 
     const getItems = useSelector((state) => state.itemsReducer.items)
@@ -33,56 +26,25 @@ const Invoice = () => {
 
     const [data, setData] = useState(INITIAL_DATA)
 
-    const [itemData, setItemData] = useState(INITIAL_ITEM)
-
     const { date, companyName, fromEmail, fromText, toEmail, toText } = data
-
-    const { itemName, itemDescription, itemQty, itemRate } = itemData
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
-        // console.log(data)
     }
-
-    // const handleItem = (e) => {
-    //     setItemData({ ...itemData, [e.target.name]: e.target.value })
-    //     console.log(itemData)
-    // }
-
-    const handleAdd = (e) => {
-        dispatch(ADDITEM(INITIAL_ITEM))
-    }
-
-    const handleName = (e, id) => {
-        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
-        dispatch(UPDATEITEMNAME(itemData))
-    }
-
-    const handleDescription = (e, id) => {
-        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
-        dispatch(UPDATEITEMDESCRIPTION(itemData))
-    }
-    
-    const handleQty = (e, id) => {
-        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
-        dispatch(UPDATEITEMQTY(itemData))
-    }
-
-    const handleRate = (e, id) => {
-        setItemData({...itemData, id:id, [ e.target.name ]:e.target.value})
-        dispatch(UPDATEITEMRATE(itemData))
-    }
-
-    console.log(itemData)
-    useEffect(() => {
-        console.log(getData)
-        console.log(getItems)
-    }, [data])
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(data)
-        dispatch(SENDDATA({...data, item:getItems}))
+        const ALL = date && companyName && fromEmail && fromText && toEmail && toText
+        if (!ALL) {
+            e.preventDefault()
+            toast.error('Please Fill Require Data')
+            setData(INITIAL_DATA)
+        } else {
+            e.preventDefault()
+            dispatch(SENDDATA({ ...data, item: getItems }))
+            toast.success('Successfully Send')
+            setData(INITIAL_DATA)
+        }
+
     }
 
     return (
@@ -99,13 +61,12 @@ const Invoice = () => {
                                     </div>
                                     <div className="col-md-6">
                                         <div className="form-floating mb-3">
-                                            <input type="email" className="form-control" id="floatingInput" placeholder="Enter Your Company Name" name='companyName' value={companyName} onChange={(e) => handleChange(e)} />
+                                            <input type="text" className="form-control" id="floatingInput" placeholder="Enter Your Company Name" name='companyName' value={companyName} onChange={(e) => handleChange(e)} />
                                             <label>Enter Your Company Name</label>
                                         </div>
                                     </div>
                                 </div>
                                 <Divider />
-                                {/* GET INVOICE DATA  */}
                                 <div className="row">
                                     <div className="col-md-6">
                                         <p className='fw-bold text-dark'>Bill From</p>
@@ -137,67 +98,22 @@ const Invoice = () => {
                                     </div>
                                     <div className="col-6">
                                         <div className="row">
-                                            <div className="col-4">
+                                            <div className="col-6">
                                                 <h6>QTY</h6>
                                             </div>
-                                            <div className="col-4">
+                                            <div className="col-6">
                                                 <h6>RATE</h6>
-                                            </div>
-                                            <div className="col-4">
-                                                <h6>TOTAL</h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <Divider />
-                                <div className="row  px-3 align-items-start">
-                                    {
-                                        getItems?.map((element, index) =>
-                                            <>
-                                                <div className="col-6">
-                                                    <div className="item-form">
-                                                        <div className="form-floating mb-3">
-                                                            <input type="text" className="form-control" id="floatingInput" placeholder="your@email.com" name='itemName' defaultValue={element.itemName} onChange={(e) => handleName(e, element.id)} />
-                                                            <label>Item Name</label>
-                                                        </div>
-                                                        <div className="form-floating">
-                                                            <input type="text" className="form-control" id="floatingPassword" placeholder="Who Is This Invoice From?" name='itemDescription' defaultValue={element.itemDescription} onChange={(e) => handleDescription(e, element.id)} />
-                                                            <label>Description</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="col-6">
-                                                    <div className="row">
-                                                        <div className="col-4">
-                                                            <input type="text" className="form-control" id="floatingPassword" name='itemQty' defaultValue={element.itemQty} placeholder="QTY" onChange={(e) => handleQty(e , element.id)} />
-                                                        </div>
-                                                        <div className="col-4">
-                                                            <input type="text" className="form-control" id="floatingPassword" name='itemRate' defaultValue={element.itemRate} placeholder="RATE" onChange={(e) => handleRate(e , element.id)} />
-                                                        </div>
-                                                        <div className="col-4">
-                                                            <input type="text" className="form-control" id="floatingPassword" placeholder="0" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </>
-                                        )
-                                    }
-                                </div>
-                                <Divider />
-                                <div className="row px-3">
-                                    <div className="col-6">
-                                        <h6 className='text-primary fw-bold' onClick={(e) => handleAdd(e)}>Add Item</h6>
-                                    </div>
-                                    <div className="col-6 d-flex justify-content-between">
-                                        <h6 className='text-danger fw-bold'>Total</h6>
-                                        <h6 className='border-0 border-bottom px-5 pb-2 border-dark'>Total</h6>
-                                    </div>
-                                </div>
+                                <Items />
                             </div>
                         </div>
                         <div className="col-md-3 px-3">
                             <button type="submit" className='btn btn-primary w-100 mb-3 py-2'>Send Invoice</button>
-                            <button className='btn btn-secondary w-100 py-2'>Send Invoice</button>
+                            <button className='btn btn-secondary w-100 py-2'>Download Invoice</button>
                         </div>
                     </div>
                 </div>

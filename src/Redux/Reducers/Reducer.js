@@ -1,7 +1,7 @@
-import { UPDATEITEMDESCRIPTION, UPDATEITEMNAME, UPDATEITEMQTY, UPDATEITEMRATE } from "../Actions/Action";
 import {
     ADD_ITEM,
-    SEND_DATA
+    DELETE_ITEM,
+    SEND_DATA,
 } from "../Actions/Constant";
 
 const INITIAL_STATE = {
@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 }
 
 const INITIAL_ITEM = {
-    items:[]
+    items: []
 }
 
 export const invoiceReducer = (state = INITIAL_STATE, action) => {
@@ -20,44 +20,26 @@ export const invoiceReducer = (state = INITIAL_STATE, action) => {
                 invoiceData: [...state.invoiceData, action.data]
             }
 
-            default:
-                return state
+        default:
+            return state
     }
 
 }
 
-export const itemsReducer = ( state = INITIAL_ITEM, action) => {
-    switch(action.type){
-        case ADD_ITEM: 
-        return{
-            ...state,
-            items: [ ...state.items, action.data]
-        }
-        case UPDATEITEMNAME: 
-        const updateName = state.items.map((element) => element.id === action.data.id ? action.data : element)
-        return{
-            ...state,
-            items: updateName
-        }
-        case UPDATEITEMDESCRIPTION: 
-        const updateDescription = state.items.map((element) => element.id === action.data.id ? action.data : element)
-        return{
-            ...state,
-            items: updateDescription
-        }
-        case UPDATEITEMQTY: 
-        const updateQty = state.items.map((element) => element.id === action.data.id ? action.data : element)
-        return{
-            ...state,
-            items: updateQty
-        }
-        case UPDATEITEMRATE: 
-        const updateRate = state.items.map((element) => element.id === action.data.id ? action.data : element)
-        return{
-            ...state,
-            items: updateRate
-        }
+export const itemsReducer = (state = INITIAL_ITEM, action) => {
+    switch (action.type) {
+        case ADD_ITEM:
+            return {
+                ...state,
+                items: [...state.items, action.data]
+            }
+        case DELETE_ITEM : 
+            const data = state.items.filter((element) => element.itemID !== action.data)
+            return{
+                ...state,
+                items:data
+            }
         default:
-                return state
+            return state
     }
 }
