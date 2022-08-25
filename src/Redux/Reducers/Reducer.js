@@ -1,6 +1,8 @@
 import {
     ADD_ITEM,
     DELETE_ITEM,
+    RESET_ITEMS,
+    RESET_REDUX,
     SEND_DATA,
 } from "../Actions/Constant";
 
@@ -18,7 +20,6 @@ export const invoiceReducer = (state = INITIAL_STATE, action) => {
             return {
                 invoiceData: [action.data]
             }
-
         default:
             return state
     }
@@ -38,6 +39,8 @@ export const itemsReducer = (state = INITIAL_ITEM, action) => {
                 ...state,
                 items:data
             }
+        case RESET_ITEMS:
+            return INITIAL_ITEM
         default:
             return state
     }

@@ -9,12 +9,21 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
 
     const [ itemTotal, setItemTotal ] = useState()
 
+    const [ gst, setGst ] = useState()
+
+    const [ grandTotal, setGrandTotal ] = useState()
+
     useEffect(() => {
         var sum = 0
         for (let i = 0; i < getItems.length; i++) {
             sum += getItems[i].total;
         }
         setItemTotal(sum)
+
+        const GST = (itemTotal / 100) * 18
+        setGst(GST)
+
+        setGrandTotal(sum + GST)
     },[getItems])
 
     return (
@@ -85,11 +94,15 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                         </div>
                         <div className="row">
                             <div className="col-6"></div>
-                            <div className="col-3">
-                                <p className="fw-bold text-primary fs-5">Total</p>
+                            <div className="col-3 text-center">
+                                <p className="fw-bold text-primary fs-5">Sub Total</p>
+                                <p className="fw-bold text-primary fs-5 border-bottom border-dark pb-3">+ GST(18%)</p>
+                                <p className="fw-bold text-primary fs-5">Total Payout</p>
                             </div>
                             <div className="col-3 text-center">
-                                <p className="fw-bold text-dark fs-5 border-bottom border-1 border-bottom-dark py-3">₹{itemTotal}</p>
+                                <p className="fw-bold text-dark fs-5">₹{itemTotal}</p>
+                                <p className="fw-bold text-dark fs-5 border-bottom border-dark pb-3">₹{gst}</p>
+                                <p className="fw-bold text-dark fs-5">₹{grandTotal}</p>
                             </div>
                         </div>
                     </div>

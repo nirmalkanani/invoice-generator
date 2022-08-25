@@ -1,4 +1,4 @@
-import { SEND_DATA, ADD_ITEM, DELETE_ITEM} from "./Constant";
+import { SEND_DATA, ADD_ITEM, DELETE_ITEM, RESET_REDUX, RESET_ITEMS} from "./Constant";
 
 export const SENDDATA = (item) => {
     return{
@@ -19,3 +19,8 @@ export const DELETEITEM = (id) => {
         data:id
     }
 } 
+export const RESETITEMS = () => {
+    return{
+        type:RESET_ITEMS
+    }
+}

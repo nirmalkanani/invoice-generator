@@ -33,7 +33,7 @@ const Items = () => {
     }
 
     const handleChange = (e) => {
-        setItemData({ ...itemData, [e.target.name]: e.target.value })
+        setItemData({ ...itemData, [e.target.name]: e.target.value})
     }
 
     const handleAdd = (e) => {
@@ -52,14 +52,6 @@ const Items = () => {
             setItemData(INITIAL_ITEM)
         }
     }
-
-    // useEffect(() => {
-    //     var sum = 0
-    //     for (let i = 0; i < getItems.length; i++) {
-    //         sum += getItems[i].total;
-    //     }
-    //     setItemTotal(sum)
-    // },[itemData])
 
     return (
         <div>
@@ -102,11 +94,11 @@ const Items = () => {
                     <div className="col-md-6 mb-3">
                         <div className="item-form">
                             <div className="form-floating mb-3">
-                                <input type="text" className="form-control" id="floatingInput" placeholder="your@email.com" name='itemName' value={itemName} onChange={(e) => handleChange(e)} />
+                                <input type="text" className="form-control" id="floatingInput" placeholder="your@email.com" name='itemName' value={itemName} onChange={(e) => handleChange(e)} autoComplete="off" />
                                 <label>Item Name</label>
                             </div>
                             <div className="form-floating">
-                                <input type="text" className="form-control" id="floatingPassword" placeholder="Who Is This Invoice From?" name='itemDescription' value={itemDescription} onChange={(e) => handleChange(e)} />
+                                <input type="text" className="form-control" id="floatingPassword" placeholder="Who Is This Invoice From?" name='itemDescription' value={itemDescription} onChange={(e) => handleChange(e)} autoComplete="off" />
                                 <label>Description</label>
                             </div>
                         </div>
@@ -114,10 +106,10 @@ const Items = () => {
                     <div className="col-md-6">
                         <div className="row">
                             <div className="col-6">
-                                <input type="text" className="form-control" id="floatingPassword" name='itemQty' value={itemQty} placeholder="QTY" onChange={(e) => handleChange(e)} />
+                                <input type="text" className="form-control" id="floatingPassword" name='itemQty' value={itemQty} placeholder="QTY" onChange={(e) => handleChange(e)} autoComplete="off" />
                             </div>
                             <div className="col-6">
-                                <input type="text" className="form-control" id="floatingPassword" name='itemRate' value={itemRate} placeholder="RATE" onChange={(e) => handleChange(e)} />
+                                <input type="text" className="form-control" id="floatingPassword" name='itemRate' value={itemRate} placeholder="RATE" onChange={(e) => handleChange(e)} autoComplete="off" />
                             </div>
                         </div>
                     </div>

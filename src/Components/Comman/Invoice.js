@@ -3,7 +3,7 @@ import ReactToPrint from 'react-to-print';
 import classes from './style.module.css'
 import { Divider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { SENDDATA } from '../../Redux/Actions/Action';
+import { SENDDATA,RESETREDUX,RESETITEMS } from '../../Redux/Actions/Action';
 import Items from './Items';
 import { toast } from 'react-toastify';
 import { ComponentToPrint } from '../PDF/GenPdf';
@@ -49,6 +49,7 @@ const Invoice = () => {
             dispatch(SENDDATA({ ...data, item: getItems, id:uuidv4() }))
             toast.success('Successfully Send')
             setData(INITIAL_DATA)
+            
         }
 
     }
@@ -123,6 +124,7 @@ const Invoice = () => {
                             <ReactToPrint
                                 trigger={() => <button type='button' className='btn btn-secondary w-100 py-2'>Download Invoice</button>}
                                 content={() => componentRef.current}
+                                onAfterPrint={() => (dispatch(RESETITEMS()))}
                             />
                             <div className='d-none'>
                                 <ComponentToPrint ref={componentRef}/>
