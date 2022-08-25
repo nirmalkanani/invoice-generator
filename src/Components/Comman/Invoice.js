@@ -1,14 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
+import ReactToPrint from 'react-to-print';
 import classes from './style.module.css'
 import { Divider } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { SENDDATA } from '../../Redux/Actions/Action';
 import Items from './Items';
 import { toast } from 'react-toastify';
+import { ComponentToPrint } from '../PDF/GenPdf';
+import { v4 as uuidv4 } from 'uuid';
 
 const Invoice = () => {
 
+    const componentRef = useRef();
+
     const INITIAL_DATA = {
+        id:"",
         date: "",
         companyName: "",
         fromEmail: "",
@@ -40,7 +46,7 @@ const Invoice = () => {
             setData(INITIAL_DATA)
         } else {
             e.preventDefault()
-            dispatch(SENDDATA({ ...data, item: getItems }))
+            dispatch(SENDDATA({ ...data, item: getItems, id:uuidv4() }))
             toast.success('Successfully Send')
             setData(INITIAL_DATA)
         }
@@ -113,11 +119,19 @@ const Invoice = () => {
                         </div>
                         <div className="col-md-3 px-3">
                             <button type="submit" className='btn btn-primary w-100 mb-3 py-2'>Send Invoice</button>
-                            <button className='btn btn-secondary w-100 py-2'>Download Invoice</button>
+                            
+                            <ReactToPrint
+                                trigger={() => <button type='button' className='btn btn-secondary w-100 py-2'>Download Invoice</button>}
+                                content={() => componentRef.current}
+                            />
+                            <div className='d-none'>
+                                <ComponentToPrint ref={componentRef}/>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
+            
         </div>
     )
 }

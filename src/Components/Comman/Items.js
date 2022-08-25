@@ -18,14 +18,13 @@ const Items = () => {
         itemName: "",
         itemDescription: "",
         itemQty: "",
-        itemRate: ""
+        itemRate: "",
+        total:""
     }
 
     const dispatch = useDispatch()
 
     const [itemData, setItemData] = useState(INITIAL_ITEM)
-
-    // const [ itemTotal, setItemTotal ] = useState()
 
     const { itemName, itemDescription, itemQty, itemRate, itemID } = itemData
 
@@ -50,14 +49,6 @@ const Items = () => {
             setItemData(INITIAL_ITEM)
         }
     }
-
-    // useEffect(() => {
-    //     var sum = 0
-    //     for (let i = 0; i < getItems.length; i++) {
-    //         sum += getItems[i].total;
-    //     }
-    //     setItemTotal(sum)
-    // },[itemData])
 
     return (
         <div>
@@ -124,7 +115,7 @@ const Items = () => {
             <Divider />
             <div className="row px-3">
                 <div className="col-6">
-                    <button className='fw-bold btn btn-success ' onClick={(e) => handleAdd(e)}>Add Item</button>
+                    <button className='fw-bold btn btn-success' type='button' onClick={(e) => handleAdd(e)}>Add Item</button>
                 </div>
                 <div className="col-6 d-flex justify-content-between">
                     <h6 className='text-danger fw-bold'>Total</h6>

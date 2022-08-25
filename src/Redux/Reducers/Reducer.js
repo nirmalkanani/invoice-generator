@@ -16,8 +16,7 @@ export const invoiceReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SEND_DATA:
             return {
-                ...state,
-                invoiceData: [...state.invoiceData, action.data]
+                invoiceData: [action.data]
             }
 
         default:
