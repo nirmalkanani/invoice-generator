@@ -37,7 +37,10 @@ const Items = () => {
     }
 
     const handleAdd = (e) => {
+        const total = itemData.itemQty * itemData.itemRate
+
         const ALL = itemName && itemDescription && itemQty && itemRate
+        
 
         if (!ALL) {
             toast.error("All Fill is Required")
@@ -45,10 +48,18 @@ const Items = () => {
             toast.error("Please Eter Only Numbers")
         }
         else {
-            dispatch(ADDITEM({ ...itemData, itemID: uuidv4() }))
+            dispatch(ADDITEM({ ...itemData, itemID: uuidv4(), total:total }))
             setItemData(INITIAL_ITEM)
         }
     }
+
+    // useEffect(() => {
+    //     var sum = 0
+    //     for (let i = 0; i < getItems.length; i++) {
+    //         sum += getItems[i].total;
+    //     }
+    //     setItemTotal(sum)
+    // },[itemData])
 
     return (
         <div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export const ComponentToPrint = React.forwardRef((props, ref) => {
 
@@ -15,7 +15,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
             sum += getItems[i].total;
         }
         setItemTotal(sum)
-    },[getData])
+    },[getItems])
 
     return (
         <div ref={ref}>
