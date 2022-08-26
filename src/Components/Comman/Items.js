@@ -157,7 +157,7 @@ const Items = () => {
             </>
             <Divider />
             <div className="row px-3">
-                <div className="col-6 offset-6">
+                <div className="col-md-6 offset-md-6">
                     <div className="subtotal d-flex justify-content-between">
                         <h6 className='text-danger fw-bold'>Sub Total</h6>
                         <h6 className=' px-5 pb-2'>₹{itemTotal}</h6>
