@@ -119,7 +119,7 @@ const Invoice = () => {
                                     </div>
                                 </div>
                                 <Divider />
-                                <Items />
+                                <Items data={data}/>
                             </div>
                         </div>
                         <div className="col-md-3 px-3">

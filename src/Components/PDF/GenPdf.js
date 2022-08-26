@@ -101,7 +101,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                             </div>
                             <div className="col-3 text-center">
                                 <p className="fw-bold text-dark fs-5">₹{itemTotal}</p>
-                                <p className="fw-bold text-dark fs-5 border-bottom border-dark pb-3">₹{gst}</p>
+                                <p className="fw-bold text-dark fs-5 border-bottom border-dark pb-3">₹{gst?.toFixed(2)}</p>
                                 <p className="fw-bold text-dark fs-5">₹{grandTotal}</p>
                             </div>
                         </div>
