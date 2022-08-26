@@ -75,7 +75,7 @@ const Invoice = () => {
                                 </div>
                                 <Divider />
                                 <div className="row">
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mb-3">
                                         <p className='fw-bold text-dark'>Bill From</p>
                                         <div className="form-floating mb-3">
                                             <input type="email" className="form-control" id="floatingInput" placeholder="your@email.com" name='fromEmail' value={fromEmail} onChange={(e) => handleChange(e)} />
@@ -86,7 +86,7 @@ const Invoice = () => {
                                             <label>Who Is This Invoice From?</label>
                                         </div>
                                     </div>
-                                    <div className="col-md-6">
+                                    <div className="col-md-6 mb-3">
                                         <p className='fw-bold text-dark'>Bill To</p>
                                         <div className="form-floating mb-3">
                                             <input type="email" className="form-control" id="floatingInput" placeholder="your@email.com" name='toEmail' value={toEmail} onChange={(e) => handleChange(e)} />
@@ -103,7 +103,7 @@ const Invoice = () => {
                                     <div className="col-6">
                                         <h6>ITEM</h6>
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-6 d-none d-md-block">
                                         <div className="row">
                                             <div className="col-4">
                                                 <h6>QTY</h6>
