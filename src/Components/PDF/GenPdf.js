@@ -24,13 +24,13 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         setGst(GST)
 
         setGrandTotal(sum + GST)
-    },[getItems])
+    },[getItems, getData, itemTotal])
 
     return (
         <div ref={ref}>
             {
                 getData?.map((element, index) =>
-                    <div className="container">
+                    <div className="container" key={index}>
                         <div className="invoice-header bg-primary py-5 align-items-center">
                             <div className="row px-3">
                                 <div className="col-6">
@@ -73,8 +73,8 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
                                 </div>
                             </div>
                             {
-                                element.item?.map((element, index) =>
-                                    <div className="row align-items-center border-bottom border-1 py-2">
+                                getItems?.map((element, index) =>
+                                    <div className="row align-items-center border-bottom border-1 py-2" key={index}>
                                         <div className="col-3 text-start">
                                             <h6>{element.itemName}</h6>
                                             <p>{element.itemDescription}</p>

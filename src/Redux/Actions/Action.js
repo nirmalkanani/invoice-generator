@@ -20,6 +20,12 @@ export const DELETEITEM = (id) => {
     }
 } 
 
+export const RESETREDUX = () => {
+    return{
+        type:RESET_REDUX
+    }
+}
+
 export const RESETITEMS = () => {
     return{
         type:RESET_ITEMS

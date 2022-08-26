@@ -20,8 +20,10 @@ export const invoiceReducer = (state = INITIAL_STATE, action) => {
             return {
                 invoiceData: [action.data]
             }
-                default:
-                    return state
+            case RESET_REDUX:
+                return INITIAL_STATE
+            default:
+                return state
     }
 
 }
