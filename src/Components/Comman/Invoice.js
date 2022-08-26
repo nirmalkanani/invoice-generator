@@ -105,11 +105,14 @@ const Invoice = () => {
                                     </div>
                                     <div className="col-6">
                                         <div className="row">
-                                            <div className="col-6">
+                                            <div className="col-4">
                                                 <h6>QTY</h6>
                                             </div>
-                                            <div className="col-6">
+                                            <div className="col-4">
                                                 <h6>RATE</h6>
+                                            </div>
+                                            <div className="col-4">
+                                                <h6>Total</h6>
                                             </div>
                                         </div>
                                     </div>
