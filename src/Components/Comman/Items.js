@@ -164,7 +164,7 @@ const Items = () => {
                     </div>
                     <div className="subtotal d-flex justify-content-between">
                         <h6 className='text-danger fw-bold'>+ GST(18%)</h6>
-                        <h6 className='px-5 pb-2'>₹{gst}</h6>
+                        <h6 className='px-5 pb-2'>₹{gst?.toFixed(2)}</h6>
                     </div>
                     <div className="subtotal d-flex justify-content-between">
                         <h6 className='text-danger fw-bold'>Total</h6>

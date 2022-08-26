@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import ReactToPrint from 'react-to-print';
 import classes from './style.module.css'
 import { Divider } from 'antd';
@@ -21,7 +21,8 @@ const Invoice = () => {
         fromText: "",
         toEmail: "",
         toText: "",
-        item: []
+        item: [
+        ]
     }
 
     const getData = useSelector((state) => state.invoiceReducer.invoiceData)
@@ -36,6 +37,7 @@ const Invoice = () => {
 
     const handleChange = (e) => {
         setData({ ...data, [e.target.name]: e.target.value })
+        dispatch(SENDDATA({ ...data, item: getItems, id:uuidv4() }))
     }
 
     const handleSubmit = (e) => {
@@ -51,12 +53,11 @@ const Invoice = () => {
             setData(INITIAL_DATA)
             
         }
-
     }
 
     return (
         <div className={classes.defaultBackground}>
-            <form action="#" onSubmit={(e) => handleSubmit(e)}>
+            <form action="#">
                 {/* Header Section  */}
                 <div className="container">
                     <div className="row p-5">

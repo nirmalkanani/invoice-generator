@@ -20,8 +20,8 @@ export const invoiceReducer = (state = INITIAL_STATE, action) => {
             return {
                 invoiceData: [action.data]
             }
-        default:
-            return state
+                default:
+                    return state
     }
 
 }
@@ -33,15 +33,15 @@ export const itemsReducer = (state = INITIAL_ITEM, action) => {
                 ...state,
                 items: [...state.items, action.data]
             }
-        case DELETE_ITEM : 
-            const data = state.items.filter((element) => element.itemID !== action.data)
-            return{
-                ...state,
-                items:data
-            }
-        case RESET_ITEMS:
-            return INITIAL_ITEM
-        default:
-            return state
+            case DELETE_ITEM:
+                const data = state.items.filter((element) => element.itemID !== action.data)
+                return {
+                    ...state,
+                    items: data
+                }
+                case RESET_ITEMS:
+                    return INITIAL_ITEM
+                default:
+                    return state
     }
 }

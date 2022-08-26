@@ -24,7 +24,7 @@ export const ComponentToPrint = React.forwardRef((props, ref) => {
         setGst(GST)
 
         setGrandTotal(sum + GST)
-    },[getItems, getData])
+    },[getItems])
 
     return (
         <div ref={ref}>
